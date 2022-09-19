@@ -1,0 +1,25 @@
+.hover_underline_animation {
+    display: inline-block;
+    position: relative;
+    color: var(--color-primary);
+  }
+  
+  .hover_underline_animation:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%,0%);
+    background-color: var(--color-primary);
+    transform-origin: center;
+    visibility: hidden;
+    transition: all 0.25s ease-out;
+  }
+  
+  .hover_underline_animation:hover:after {
+    visibility: visible;
+    width: 100%;
+    transform-origin: bottom left;
+  }

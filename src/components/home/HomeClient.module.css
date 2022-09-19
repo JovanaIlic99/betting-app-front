@@ -1,0 +1,32 @@
+.left_div{
+    width: 100%;
+}
+.center_div{
+    width: 100%;
+    
+}
+.right_div{
+    width: 100%;
+    
+}
+.left_div_container{
+    padding: 10px 10px 10px 10px;
+    width: 25%;
+    border: 1px solid var(--color-gray);
+}
+.center_div_container{
+    padding: 10px 10px 10px 10px;
+    width: 55%;
+    border: 1px solid var(--color-gray);
+}
+.center_div_container_max{
+    height: 100%;
+    width: 100%;
+    border: 1px solid var(--color-gray);
+}
+.right_div_container{
+    padding: 10px 10px 10px 10px;
+    width: 25%;
+    border: 1px solid var(--color-gray);
+    
+}

@@ -1,0 +1,49 @@
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin: 0 auto 2rem;
+  padding: 0;
+  width: 70%;
+  
+}
+
+ul {
+  display: inline-block;
+}
+.link {
+  width: 20%;
+  text-align: center;
+  padding: 0;
+  list-style: none;
+}
+
+.hover_underline_animation {
+  margin-left:2rem;
+  margin-right:2rem;
+  display: inline-block;
+  position: relative;
+  color: var(--color-primary);
+}
+
+.hover_underline_animation:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%,0%);
+  background-color: var(--color-primary);
+  transform-origin: center;
+  visibility: hidden;
+  transition: all 0.25s ease-out;
+}
+
+.hover_underline_animation:hover:after {
+  visibility: visible;
+  width: 100%;
+  transform-origin: bottom left;
+}
+

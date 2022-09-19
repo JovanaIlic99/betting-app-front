@@ -1,0 +1,40 @@
+.LoginToPlay {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  background-color: var(--color-primary);
+  color: white;
+  letter-spacing: 1.5px;
+  word-spacing: 4px;
+  height: 2.5em;
+}
+a {
+  display: flex;
+  justify-content: center;
+}
+h4 {
+  margin: auto;
+  color: white;
+}
+
+h4:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  background-color: white;
+  transform-origin: center;
+  visibility: hidden;
+  transition: all 0.25s ease-out;
+}
+
+h4:hover:after {
+    color: black;
+  visibility: visible;
+  width: 100%;
+  transform-origin: bottom left;
+}
