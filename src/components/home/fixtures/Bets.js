@@ -16,14 +16,14 @@ function Bets(props) {
         return (
           <BetButton
             value={{
-              id: props.group.id,
+              id: odd.id,
               bet_group_name: props.group.name,
-              name: odd.value,
+              name: odd.name,
               odd: odd.odd,
             }}
             name={odd.odd}
             bet={props.bet}
-            key={odd.value}
+            key={odd.id}
             handleClick={props.handleClick} 
           />
         );

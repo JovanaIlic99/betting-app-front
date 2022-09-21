@@ -11,11 +11,39 @@ const button_text={
 }
 
 function CategoriesFilterButton(props) {
-  const [selectedLeague, setLeague] = React.useState(true);
 
-  function setLeagueHandler() {
-    setLeague(!selectedLeague);
-  }
+  
+  const handleClick = (e) => {
+    if (e.target.value !== undefined){
+    var selected_league = JSON.parse(e.target.value);
+
+    console.log(selected_league);
+    if (selected_league===undefined || props.league_filter.length === 0 ||
+      !props.league_filter.some((fLeague) => {
+        if (fLeague===undefined || fLeague.id === selected_league.id) {
+          return true;
+        }
+        return false;
+      }) 
+    ) {
+      props.setLeagueFilter((prevleagues)=>{
+        return prevleagues.concat(selected_league)
+      })
+      console.log("Added league: " );
+      console.log(selected_league);
+    } else {
+      for (var i = 0; i < props.league_filter.length; i++) {
+        if (props.league_filter[i].id === selected_league.id) {
+          var fileter = props.league_filter;
+          fileter.splice(i, 1);
+          props.setLeagueFilter(fileter)
+          console.log("Removed league: " + selected_league.name);
+        }
+      }
+    }
+    console.log(props.league_filter);
+    }
+  };
 
   const button = {
     width: "100%",
@@ -24,8 +52,8 @@ function CategoriesFilterButton(props) {
     borderRadius: "0",
     paddingLeft:"10px",
     margin: "0",
-    backgroundColor: selectedLeague ? "var(--color-primary-light)" : "white",
-    color: selectedLeague ? "white" : "var(--color-primary-light)",
+    backgroundColor:  "var(--color-primary-light)",
+    color: "white" ,
     ":hover": {
       backgroundColor: "var(--color-primary)",
       color: "white",
@@ -42,7 +70,7 @@ function CategoriesFilterButton(props) {
           name:props.name})}
         sx={button}
         variant="text"
-        onClick={setLeagueHandler}
+        onClick={handleClick}
       >
        <Typography sx={button_text}> {props.name}</Typography>
       </Button>

@@ -7,6 +7,7 @@ import classes from "./Footer.module.css";
 import LinkList from "../links/LinkList";
 import authService from "../../service/auth.service";
 
+
 const basicClientPages = [
   { id: 1, title: "Home", path: "/" },
   { id: 2, title: "Contact Us", path: "/contact" },
@@ -19,29 +20,15 @@ const adminPages = [
 ];
 
 function Footer(props) {
-  let pages=basicClientPages;
-
-  useEffect(() => {
-    const token = authService.getToken();
-
-    if (token) {
-      const role = token.authorities[0].authority;
-      if (role === "ROLE_CLIENT") {
-        pages = basicClientPages;
-      } else {
-        pages = adminPages;
-      }
-    } else {
-      pages = basicClientPages;
-    }
-  }, []);
+    let pages=basicClientPages;
+ 
 
   return (
     <footer>
       <a href="/" className={classes.logo}>
         TriumphBet
       </a>
-      <LinkList links = {pages}/>
+      <LinkList links={pages} />
 
       <div className={classes.socials}>
         <a href="https://facebook.com">
@@ -60,6 +47,6 @@ function Footer(props) {
       </div>
     </footer>
   );
-};
+}
 
 export default Footer;

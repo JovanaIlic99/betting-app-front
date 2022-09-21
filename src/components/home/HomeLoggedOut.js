@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 function HomeClient() {
   return (
     <div className="container_margin">
-      <Stack direction={ "column" } spacing={{ xs: 1, sm: 2, md: 3 }}>
+      <Stack direction={ "column" } spacing={{ xs: 1, sm: 2, md: 3 }} sx={{height:"50vh"}}>
         <div className={[classes.LoginToPlay]}>
           <Link to="/login" >
             <h4 className={classes.hover_underline_animation}>
@@ -14,10 +14,6 @@ function HomeClient() {
             </h4>
           </Link>
         </div>
-    <div >
-        UTAKMICE
-
-    </div>
       </Stack>
     </div>
   );

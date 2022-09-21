@@ -60,6 +60,12 @@ function User(props) {
     setAnchorElUser(null);
   };
 
+  function logoutHandler(){
+    authService.logout();
+    props.setLoggedIn(false);
+    props.setRole("");
+  }
+
   return (
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Open settings">
@@ -84,18 +90,9 @@ function User(props) {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        {props.settings.map((setting) => (
-          <MenuItemList
-            key={setting.id}
-            title={setting.title}
-            path={setting.path}
-            action={handleCloseUserMenu}
-            sx={menuItemBox}
-          />
-        ))}
         <MenuItem>
           <Box sx={logout_button}>
-            <Link to="/" key="3{setting.id}" onClick={authService.logout}>
+            <Link to="/" key="3{setting.id}" onClick={logoutHandler}>
               <Typography sx={logout_Link}>Logout</Typography>
             </Link>
           </Box>

@@ -44,6 +44,7 @@ function Fixture(props) {
     }
   };
 
+
   function setBetHandler(sel_bet) {
     var selected_bet = {
       fixture: {

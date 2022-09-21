@@ -3,6 +3,8 @@ import TextField from "@mui/material/TextField";
 import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import { useContext } from "react";
+import ticketService from "../../../service/ticket.service";
+import authService from "../../../service/auth.service";
 
 import TicketContext from "../../../store/ticket-context";
 
@@ -71,6 +73,25 @@ const title = {
 
 
 function WagerInfo() {
+  function sendTicket(){
+    console.log("sending tikcet")
+    var ticket ={
+      bets:ticketCxt.ticket,
+      wager:ticketCxt.wager,
+      totalOdds:ticketCxt.totalOdds,
+      payout:ticketCxt.payout,
+      username:authService.getToken().sub
+    }
+    console.log(ticket);
+    ticketService
+    .postTicket(ticket)
+    .then((response)=>{
+      ticketCxt.clearTicket();
+      console.log("ticket sent succesffuly")
+    })
+    .catch((error)=> {console.log(error)})
+  }
+
   const ticketCxt = useContext(TicketContext);
   return (
     <Box sx={box}>
@@ -108,7 +129,7 @@ function WagerInfo() {
           </Box>
           <Box>
             <Button sx={button}>
-              <Typography sx={title}>Play ticket</Typography>
+              <Typography sx={title} onClick={sendTicket}>Play ticket</Typography>
             </Button>
           </Box>
         </Box>

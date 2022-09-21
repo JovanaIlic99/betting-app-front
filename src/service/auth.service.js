@@ -2,37 +2,37 @@ import axios from "axios";
 import jwtDecode from "jwt-decode";
 
 const API_URL = "http://localhost:8080/api/";
-const API_URL_REGISTER = API_URL + "register";
+const API_URL_REGISTER = API_URL + "user/register";
 const API_URL_LOGIN = API_URL + "login";
 
 class AuthService {
- async register(name, surname, email, dateOfBirth, username, password) {
-    return await axios.post(API_URL_REGISTER, {
-      name,
-      surname,
-      email,
-      dateOfBirth,
-      username,
-      password,
+register(name, surname, email, username,password) {
+    return  axios.post(API_URL_REGISTER, {
+      name: name,
+      surname: surname,
+      email: email,
+      username: username,
+      password: password,
     });
   }
 
   async login(username, password) {
+    console.log(username  );
+    console.log(password  );
     const response = await axios
       .post(API_URL_LOGIN, {
-        username,
-        password,
+        username: username,
+        password: password,
       });
-    if (response.headers.authorization) {
       console.log(response);
-      var token = response.headers.authorization;
+      var token = response.data.access_token;
       token = token.replace("Bearer", "");
       localStorage.setItem("token", JSON.stringify(token));
 
       var decoded = jwtDecode(token);
       console.log(decoded);
-      localStorage.setItem("data", decoded);
-    }
+      localStorage.setItem("data", JSON.stringify(decoded));
+    
     return response.data;
   }
 

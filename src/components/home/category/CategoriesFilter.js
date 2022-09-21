@@ -1,17 +1,11 @@
 import { Box } from "@mui/material";
 import * as React from "react";
 import ButtonGroup from "@mui/material/ButtonGroup";
+import Button from "@mui/material/Button";
 import CategoriesFilterButton from "./CategoriesFilterButton";
 
-const all_leagues = [
-  { id: 39, name: "Premier League" },
-  { id: 2, name: "LaLiga" },
-  { id: 3, name: "Seria A" },
-  { id: 4, name: "BundesLiga" },
-  { id: 5, name: "Ligue 1" },
-];
 
-const league_filter = [];
+
 
 const button = {
   width: "100%",
@@ -35,8 +29,23 @@ const title = {
   textAlign: "left",
   alignItems: "left",
 };
+const button_filter={
+  width:'100%',
+  color:"white",
+  backgroundColor:"var(--color-gray)",
+  borderRadius:"0",
+  ":hover": {
+      backgroundColor: "black",
+      color: "white",
+      border: "1px solid white",
+    },
+}
 
 function CategoriesFilter(props) {
+
+  const [league_filter, setLeagueFilter] = React.useState([]);
+
+
   const handleClick = (e) => {
     if (e.target.value !== undefined){
     var selected_league = JSON.parse(e.target.value);
@@ -50,21 +59,33 @@ function CategoriesFilter(props) {
         return false;
       }) 
     ) {
-      league_filter.push(selected_league);
+      setLeagueFilter((prevleagues)=>{
+        return prevleagues.concat(selected_league)
+      })
       console.log("Added league: " );
       console.log(selected_league);
     } else {
       for (var i = 0; i < league_filter.length; i++) {
         if (league_filter[i].id === selected_league.id) {
-          league_filter.splice(i, 1);
+          var fileter = league_filter;
+          fileter.splice(i, 1);
+          setLeagueFilter(fileter)
           console.log("Removed league: " + selected_league.name);
         }
       }
     }
-    props.filter_function(league_filter);
-    console.log(league_filter);
     }
+    
   };
+
+  function filter(){
+    console.log("Category filter ");
+    console.log(league_filter);
+    props.filter_function();
+  }
+  function lockInFilter(){
+    props.setFilter(league_filter)
+  }
 
   return (
     <div>
@@ -77,20 +98,23 @@ function CategoriesFilter(props) {
         key="-1"
       >
         <h2 style={title}>Categories</h2>
-        <ButtonGroup onClick={handleClick} orientation="vertical" sx={button} 
-        key="-3">
-          {all_leagues.map((league) => {
+        {/* <ButtonGroup onClick={handleClick} orientation="vertical" sx={button} 
+        key="-3"> */}
+          {props.all_leagues!==undefined && props.all_leagues.length!==0 ? props.all_leagues.map((league) => {
             return (
               <>
                 <CategoriesFilterButton
-                  key={league.id+2}
+                  key={league.id}
                   name={league.name}
                   id={league.id}
+                  click={handleClick}
+                  league_filter={league_filter}
+                  setLeagueFilter={setLeagueFilter}
                 />
               </>
             );
-          })}
-        </ButtonGroup>
+          }) : <></>}
+        {/* </ButtonGroup> */}
       </Box>
       <Box
         sx={{ display: { xs: "block", sm: "block", md: "none" } }}

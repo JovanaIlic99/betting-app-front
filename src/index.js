@@ -9,6 +9,7 @@ import { TicketContextProvider } from "./store/ticket-context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
+
   <TicketContextProvider>
     <BrowserRouter>
       <App />

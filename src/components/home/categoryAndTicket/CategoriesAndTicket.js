@@ -5,6 +5,7 @@ import * as React from "react";
 import classes from "./CategoriesAndTicket.module.css";
 import Stack from "@mui/material/Stack";
 import CategoryDrawer from "./CategoryDrawer";
+import TicketDrawer from "./TicketDrawer";
 
 const button = {
   width: "100%",
@@ -88,6 +89,13 @@ function CategoriesAndTicket(props) {
           aria-label="open drawer"
           onClick={handleDrawerOpenTicket}
         >
+          {(openTicket && 
+            <TicketDrawer
+              isOpen={openTicket}
+              openFunc={handleDrawerOpenTicket}
+              closeFunc={handleDrawerCloseTickets}
+            />
+          ) }
           TICKET
         </Button>
       </Stack>

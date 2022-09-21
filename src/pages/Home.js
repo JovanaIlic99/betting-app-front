@@ -2,30 +2,13 @@ import { useEffect } from "react";
 import HomeLoggedOut from "../components/home/HomeLoggedOut";
 import HomeClient from "../components/home/HomeClient";
 import HomeAdmin from "../components/home/HomeAdmin";
-import authService from "../service/auth.service";
 
+function Home(props) {
 
-function Home() {
-    var display=<HomeClient />;
-    useEffect(() => {
-        const token = authService.getToken();
-        if (token) {
-          const role = token.authorities[0].authority;
-          if (role === "ROLE_CLIENT") {
-            display=<HomeClient />;
-          } else {
-            display=<HomeAdmin />;
-          }
-        } else {
-            display=<HomeLoggedOut />;;
-        }
-      }, []);
+ console.log(props.role)
+ 
 
-  return (
-    <div className="container_margin">
-      {display}
-    </div>
-  );
+  return <div className="container_margin">{props.role === 'ROLE_ADMIN' ? <HomeAdmin /> : props.role === 'ROLE_CLIENT' ?  <HomeClient /> : <HomeLoggedOut /> }</div>;
 }
 
 export default Home;
